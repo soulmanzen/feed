@@ -25,7 +25,6 @@ require_once 'lib/db_connect.php';
         <tbody>                    <!-- тело таблицы где даные-->
             <?php
             $query = mysqli_query($connect, "SELECT * FROM posts");
-            $post = mysqli_fetch_object($query);
 
             while ($post = mysqli_fetch_object($query)) {
                 echo '<tr>';
@@ -44,8 +43,10 @@ require_once 'lib/db_connect.php';
 <!--$query = mysqli_query($connect, "SELECT * FROM posts");-->
 <!--$post = mysqli_fetch_object($query);-->
 <!---->
-<!--while ($post = mysqli_fetch_object($query)) {-->
-<!--    echo "<pre>";-->
-<!--    var_dump($post);-->
-<!--    echo '</pre>';-->
-<!--}-->
+<?php
+//while ($post = mysqli_fetch_object($query)) {
+//    echo "<pre>";
+//    var_dump($post);
+//    echo '</pre>';
+//}
+//?>
