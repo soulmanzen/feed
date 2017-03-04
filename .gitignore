@@ -1,3 +1,6 @@
+
 /.idea
-# игнорирование папки '.idea'
-/logs
+/feed.iml
+/logs/
+/garbage
+/HW_Stas
