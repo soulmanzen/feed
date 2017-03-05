@@ -1,9 +1,12 @@
 <?php
-session_start();
-require_once 'lib/db_connect.php';
-if(!empty($_SESSION['message'])){
-    echo $_SESSION['message'];
-}
+ini_set('display_errors', 1);
+
+require_once 'lib/db_queries.php';
+require_once 'lib/flash_messages.php';
+
+echo show_flash_message('message');
+
+
 ?>
 <html>
 <head>
@@ -13,8 +16,8 @@ if(!empty($_SESSION['message'])){
 <body>
 
 <?php
-$query = mysqli_query($connect,"SELECT * FROM posts WHERE id={$_GET['id']}");
-if($post = mysqli_fetch_object($query)){
+//$query = mysqli_query($connect,"SELECT * FROM posts WHERE id={$_GET['id']}");
+if($post = select_record('posts', 'id', $_GET['id'], true)){
     echo '<h1>', $post->title,'</h1>';
     echo '<p>', $post->description,'</p>';
     echo '<a href="/">Cсылка назад</a>', ' <a style="margin-left: 2%" class="btn btn-primary" href="/comments/new_comment.php?post_id='.$post->id.'">Новый коммент</a>
@@ -34,8 +37,9 @@ if($post = mysqli_fetch_object($query)){
     <tbody>
 
 <?php
-$query_comment = mysqli_query($connect,"SELECT * FROM comments WHERE post_id={$_GET['id']}");
-while ($comment = mysqli_fetch_object($query_comment)){
+//$query_comment = mysqli_query($connect,"SELECT * FROM comments WHERE post_id={$_GET['id']}");
+//while ($comment = mysqli_fetch_object($query_comment)){
+foreach (select_record('comments', 'post_id', $_GET['id']) as $comment){
     echo '<tr>';
     echo '<td>', $comment->id, '</td>';
     echo '<td>', $comment->content, '</td>';

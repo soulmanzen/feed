@@ -2,6 +2,8 @@
 ini_set('display_errors', 1);
 
 require_once '../lib/db_connect.php';
+require_once '../lib/db_queries.php';
+
 
 session_start();
 /**
@@ -13,8 +15,9 @@ session_start();
 $id = $_GET['id'];
 $post_id = $_GET['post_id'];
 if (!empty($id)) {
-    $query = "DELETE FROM comments WHERE id=$id";
-    $result = mysqli_query($connect, $query);
+//    $query = "DELETE FROM comments WHERE id=$id";
+//    $result = mysqli_query($connect, $query);
+    $result = delete_record('comments', 'id', $id);
     if (!$result) {
         print_r(mysqli_error_list($connect));
     } else {

@@ -3,8 +3,9 @@ ini_set('display_errors', 1);
 
 session_start();
 require_once '../lib/db_connect.php';
-
 require_once '../forms/comment_form.php';
+require_once '../lib/db_queries.php';
+
 $id = $_GET['id'];
 $post_id = $_GET['post_id'];
 ?>
@@ -25,9 +26,10 @@ $post_id = $_GET['post_id'];
     <div class="row">
     <?php
         if (!empty($id)) {
-            $query = "SELECT * FROM comments WHERE id=$id";
-            $result = mysqli_query($connect, $query);
-            if (!$comment = mysqli_fetch_object($result)) {
+//            $query = "SELECT * FROM comments WHERE id=$id";
+//            $result = mysqli_query($connect, $query);
+//            if (!$comment = mysqli_fetch_object($result)) {
+            if (!$comment = select_record('comments', 'id', $id, true)) {
                 $_SESSION['message'] = "Ваш коммент 404!";
                 return header('Location: http://feed.loc/show.php?id='.$post_id.' ');
             } else {
@@ -41,4 +43,4 @@ $post_id = $_GET['post_id'];
     </div>
 </div>
 </body>
-</html>*
+</html>

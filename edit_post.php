@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once 'lib/db_connect.php';
-require_once 'post_form.php';
+require_once 'forms/post_form.php';
+require_once 'lib/db_queries.php';
+
 $id = $_GET['id'];
 ?>
 <html>
@@ -21,9 +23,10 @@ $id = $_GET['id'];
     <div class="row">
     <?php
         if (!empty($id)) {
-            $query = "SELECT * FROM posts WHERE id=$id";
-            $result = mysqli_query($connect, $query);
-            if (!$post = mysqli_fetch_object($result)) {
+//            $query = "SELECT * FROM posts WHERE id=$id";
+//            $result = mysqli_query($connect, $query);
+//            if (!$post = mysqli_fetch_object($result)) {
+            if (!$post = select_record('posts', 'id', $id, true)) {
                 $_SESSION['message'] = "Ваш пост 404!";
                 return header('Location:/');
             } else {

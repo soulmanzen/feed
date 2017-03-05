@@ -1,5 +1,5 @@
 <?php
-require_once 'lib/db_connect.php';
+require_once 'lib/db_queries.php';
 
 
 session_start();
@@ -11,15 +11,12 @@ session_start();
  */
 $id = $_GET['id'];
 if (!empty($id)) {
-    $query = "DELETE FROM posts WHERE id=$id";
-    $result = mysqli_query($connect, $query);
-    if (!$result) {
-        print_r(mysqli_error_list($connect));
+    if (!delete_record('posts', 'id', $id)) {
+        $_SESSION['message'] = "Ошибка удаления!";
     } else {
         $_SESSION['message'] = "Ваш пост УДАЛЕН!";
-        return header('Location:/');
     }
 }else{
     $_SESSION['message'] = "Введите корректный id";
-    return header('Location:/');
 }
+return header('Location:/');

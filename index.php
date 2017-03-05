@@ -5,8 +5,8 @@
  * Date: 22.02.17
  * Time: 21:46
  */
-session_start();
-require_once 'lib/db_connect.php';
+require_once 'lib/flash_messages.php';
+require_once 'lib/db_queries.php';
 
 ?>
 
@@ -15,9 +15,7 @@ require_once 'lib/db_connect.php';
     <link rel="stylesheet" type="text/css" href="/assets/bootstrap.min.css"/>
 </head>
 <body>
-<?php if(!empty($_SESSION['message'])){
-     echo $_SESSION['message'];
-}
+<?php echo show_flash_message('message');
 ?>
 <table class='table'>
     <thead>
@@ -30,8 +28,7 @@ require_once 'lib/db_connect.php';
     </thead>
     <tbody>
     <?php
-        $query = mysqli_query($connect,"SELECT * FROM posts");
-        while($post = mysqli_fetch_object($query)){
+        foreach(select_record('posts') as $post){
             echo '<tr>';
             echo '<td>',$post->id,'</td>';
             echo '<td>',$post->title,'</td>';
