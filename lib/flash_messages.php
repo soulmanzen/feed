@@ -22,5 +22,5 @@ function show_flash_message($key){
 }
 
 function flash_exists($key){
-    !empty($_SESSION[$key]);
+    return !empty($_SESSION[$key]);
 }

@@ -8,17 +8,17 @@
 
 ini_set('display_errors', 1);
 
-session_start();
 
+require_once '../lib/flash_messages.php';
 require_once '../lib/db_connect.php';
 require_once '../lib/db_queries.php';
 
 $post_id = $_GET['post_id'];
-$description = $_POST['description'];
+$_POST['post_id'] = $post_id;
 
 //$query = "INSERT INTO comments (post_id, content) VALUES ('$post_id', '$description')";
 //$result = mysqli_query($connect, $query);
-$result = create_record('comments', $description, false, $post_id);
+$result = create_record('comments', $_POST);
 if(!$result){
     print_r(mysqli_error_list($connect));
 }else{

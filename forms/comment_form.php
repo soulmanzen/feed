@@ -11,9 +11,9 @@ function get_comment_form($path, $action = 'new', $comment = null)
     return '<form method="post" action="' . $path . '" class="form-horizontal col-md-6 col-md-offset-3">
             <h2>' . (($action == 'edit') ? "Редактируем $comment->id" : 'Добавить новый') . '</h2>
             <div class="form-group">
-                <label for="description" class="col-sm-2 control-label">Описание</label>
+                <label for="content" class="col-sm-2 control-label">Описание</label>
                 <div class="col-sm-10">
-                    <textarea name="description" class="form-control" id="description"
+                    <textarea name="content" class="form-control" id="content"
                               placeholder="Содержание...">' . ($comment ? $comment->content : null ) . '</textarea>
                 </div>
             </div>

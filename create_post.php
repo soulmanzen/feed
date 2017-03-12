@@ -11,12 +11,10 @@ require_once 'lib/flash_messages.php';
 require_once 'lib/db_connect.php';
 require_once 'lib/db_queries.php';
 
-$title = $_POST['title'];
-$description = $_POST['description'];
 
 //$query = "INSERT INTO posts (title, description) VALUES ('$title', '$description')";
 //$result = mysqli_query($connect, $query);
-$result = create_record('posts', $description, $title);
+$result = create_record('posts', $_POST);
 if(!$result){
     print_r(mysqli_error_list($connect));
 }else{
